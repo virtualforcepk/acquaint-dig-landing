@@ -219,9 +219,9 @@ export default function App() {
         <section id="ingredients" className="section">
           <div className="wrap">
             <div className="eyebrow" data-reveal>Proof, not pitch</div>
-            <h2 className="h2" data-reveal>We&apos;ve already built this. Twice.</h2>
+            <h2 className="h2" data-reveal>We build the systems operators run on.</h2>
             <p className="sub" data-reveal>
-              We deployed <strong>OpenClaw</strong> — an enterprise-grade, multi-agent automation system — in production for <strong>Lease At Ease</strong> and <strong>Amazon Key for Business</strong>. It sources, scores, and works leads every day.
+              Years of building production AI systems and the front-ends around them — alongside operators across the industry. Automation that <strong>sources, scores, and works leads</strong>, every day. Not demos.
             </p>
             <div className="metrics" data-reveal>
               <div className="metric"><div className="n" ref={m1}>0+</div><div className="l">prospects sourced</div></div>
@@ -229,7 +229,7 @@ export default function App() {
               <div className="metric"><div className="n" ref={m3}>0+</div><div className="l">leads actively worked</div></div>
             </div>
             <p className="proofline" data-reveal>
-              Lease At Ease: 15–20 booked appointments / month, 2× VA efficiency. Amazon Key for Business: a full multi-agent funnel. And the front-end? <em>You&apos;re reading one.</em>
+              Multi-agent funnels, full-stack builds, CRM and outreach automation — deployed and running. And the front-end? <em>You&apos;re reading one.</em>
             </p>
           </div>
         </section>
