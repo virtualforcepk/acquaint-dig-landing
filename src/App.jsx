@@ -7,11 +7,14 @@ const CALENDLY = 'https://calendly.com/kamran1-sou9/30min'
 
 // 4 services — names exactly as specified; gem stills used as subtle card visuals.
 const SERVICES = [
-  { idx: '01', name: 'Digital Strategy', accent: 'var(--emerald)', img: '/img/03-emerald.png' },
-  { idx: '02', name: 'Paid Advertising (Meta & Google)', accent: 'var(--sapphire-facet)', img: '/img/04-sapphire.png' },
-  { idx: '03', name: 'AI Automation & CRM', accent: 'var(--emerald-facet)', img: '/img/02-dig.png' },
-  { idx: '04', name: 'Real Estate Ads', accent: 'var(--sapphire)', img: '/img/06-cta-resolve.png' },
+  { idx: '01', name: 'Digital Strategy', accent: 'var(--emerald)', img: 'img/03-emerald.png' },
+  { idx: '02', name: 'Paid Advertising (Meta & Google)', accent: 'var(--sapphire-facet)', img: 'img/04-sapphire.png' },
+  { idx: '03', name: 'AI Automation & CRM', accent: 'var(--emerald-facet)', img: 'img/02-dig.png' },
+  { idx: '04', name: 'Real Estate Ads', accent: 'var(--sapphire)', img: 'img/06-cta-resolve.png' },
 ]
+
+// Base-aware asset URLs so the build works at any deploy base (root domain or subpath).
+const BASE = import.meta.env.BASE_URL
 
 export default function App() {
   const bgRef = useRef(null)
@@ -124,10 +127,10 @@ export default function App() {
     <>
       {/* fixed background motion layer */}
       <div className="bg-layer">
-        <video ref={bgRef} className="bg-video" muted playsInline preload="auto" poster="/img/00-hero-surface.png">
-          <source src="/bg.mp4" type="video/mp4" />
+        <video ref={bgRef} className="bg-video" muted playsInline preload="auto" poster={`${BASE}img/00-hero-surface.png`}>
+          <source src={`${BASE}bg.mp4`} type="video/mp4" />
         </video>
-        <div className="bg-static" aria-hidden="true" />
+        <div className="bg-static" aria-hidden="true" style={{ backgroundImage: `url(${BASE}img/05-diamond.png)` }} />
       </div>
       <div className="bg-tint" aria-hidden="true" />
 
@@ -190,7 +193,7 @@ export default function App() {
             <div className="cards">
               {SERVICES.map((s) => (
                 <article className="card" key={s.idx} style={{ '--card-accent': s.accent }} data-reveal>
-                  <img className="cv" src={s.img} alt="" aria-hidden="true" />
+                  <img className="cv" src={`${BASE}${s.img}`} alt="" aria-hidden="true" />
                   <div className="idx">{s.idx}</div>
                   <div className="name">{s.name}</div>
                 </article>
