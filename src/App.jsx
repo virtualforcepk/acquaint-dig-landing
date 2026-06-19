@@ -171,7 +171,7 @@ export default function App() {
       {/* fixed background motion layer */}
       <div className="bg-layer" ref={bgLayerRef}>
         <video ref={bgRef} className="bg-video" muted playsInline preload="auto" poster={`${BASE}img/00-hero-surface.png`}>
-          <source src={`${BASE}bg.mp4?v=fast2`} type="video/mp4" />
+          <source src={`${BASE}bg.mp4?v=enc3`} type="video/mp4" />
         </video>
         <div className="bg-static" aria-hidden="true" style={{ backgroundImage: `url(${BASE}img/05-diamond.png)` }} />
       </div>
