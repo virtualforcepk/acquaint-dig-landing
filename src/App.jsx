@@ -6,12 +6,22 @@ import { createDiamond3D } from './diamond3d'
 
 const CALENDLY = 'https://calendly.com/kamran1-sou9/30min'
 
-// 4 services — names exactly as specified; gem stills used as subtle card visuals.
+// Two offers, with gem stills as subtle card visuals.
 const SERVICES = [
-  { idx: '01', name: 'Digital Strategy', accent: 'var(--emerald)', img: 'img/03-emerald.png' },
-  { idx: '02', name: 'Paid Advertising (Meta & Google)', accent: 'var(--sapphire-facet)', img: 'img/04-sapphire.png' },
-  { idx: '03', name: 'AI Automation & CRM', accent: 'var(--emerald-facet)', img: 'img/02-dig.png' },
-  { idx: '04', name: 'Real Estate Ads', accent: 'var(--sapphire)', img: 'img/06-cta-resolve.png' },
+  {
+    idx: '01',
+    name: 'Lead-Gen Systems That Convert',
+    accent: 'var(--emerald)',
+    img: 'img/03-emerald.png',
+    desc: 'We find your next customer and turn them into a sale. Targeting, multi-channel outreach, AI lead-scoring and CRM automation — engineered as one system, running on autopilot.',
+  },
+  {
+    idx: '02',
+    name: 'UX/UI + Full-Stack Deployment',
+    accent: 'var(--sapphire-facet)',
+    img: 'img/05-diamond.png',
+    desc: 'The front-end that closes them. Product design, web apps and full-stack builds — designed, engineered and shipped to production. (Exhibit A: this page.)',
+  },
 ]
 
 // Base-aware asset URLs so the build works at any deploy base (root domain or subpath).
@@ -172,9 +182,9 @@ export default function App() {
       <nav className="nav">
         <a className="wm" href="#home">Acquaint.</a>
         <div className="links">
-          <a href="#catalog">Services</a>
+          <a href="#catalog">Systems</a>
           <a href="#ingredients">Work</a>
-          <a href="#cta">About</a>
+          <a href="#split">Approach</a>
           <a className="book" href={CALENDLY} target="_blank" rel="noreferrer">Book a call</a>
         </div>
       </nav>
@@ -183,12 +193,12 @@ export default function App() {
         {/* HOME / hero — surface */}
         <section id="home" className="section">
           <div className="wrap" data-reveal>
-            <div className="eyebrow">Lead generation, reimagined</div>
-            <h1 className="h1">Stop buying clicks. Start mining customers.</h1>
-            <p className="sub">Your next customer is buried in the noise. We dig until they surface.</p>
+            <div className="eyebrow">AI systems + front-end</div>
+            <h1 className="h1">We build the systems that find your customers — and the front-ends that close them.</h1>
+            <p className="sub">Acquaint Media ships production lead-gen systems and the full-stack experiences that convert them. Not campaigns. Systems that run while you sleep.</p>
             <div className="cta-row">
               <a className="btn" href={CALENDLY} target="_blank" rel="noreferrer">Book a call</a>
-              <a className="btn-ghost" href="#cta">or get a free audit</a>
+              <a className="btn-ghost" href="#cta">or get a free teardown</a>
             </div>
           </div>
           <div className="cue"><span className="dot" /> Scroll to dig</div>
@@ -197,10 +207,10 @@ export default function App() {
         {/* SPLIT / the dig */}
         <section id="split" className="section">
           <div className="wrap">
-            <div className="eyebrow" data-reveal>The dig</div>
-            <h2 className="h2" data-reveal>Your market is mostly dirt.</h2>
+            <div className="eyebrow" data-reveal>The problem</div>
+            <h2 className="h2" data-reveal>Your market is mostly noise.</h2>
             <p className="sub" data-reveal>
-              So we start digging. Targeting, outreach, funnels and AI that sift the whole market — not just skim the top.
+              Most agencies sell you clicks and a landing page. We build the system underneath — targeting, outreach, AI scoring, and the interface that converts — then we run it for you.
             </p>
           </div>
         </section>
@@ -208,28 +218,36 @@ export default function App() {
         {/* INGREDIENTS / gems + proof (pinned) */}
         <section id="ingredients" className="section">
           <div className="wrap">
-            <div className="eyebrow" data-reveal>The gems</div>
-            <h2 className="h2" data-reveal>And we hit gems.</h2>
-            <p className="sub" data-reveal>Qualified prospects, ready to buy — delivered straight to your pipeline.</p>
+            <div className="eyebrow" data-reveal>Proof, not pitch</div>
+            <h2 className="h2" data-reveal>We&apos;ve already built this. Twice.</h2>
+            <p className="sub" data-reveal>
+              We deployed <strong>OpenClaw</strong> — an enterprise-grade, multi-agent automation system — in production for <strong>Lease At Ease</strong> and <strong>Amazon Key for Business</strong>. It sources, scores, and works leads every day.
+            </p>
             <div className="metrics" data-reveal>
               <div className="metric"><div className="n" ref={m1}>0+</div><div className="l">prospects sourced</div></div>
               <div className="metric"><div className="n" ref={m2}>0+</div><div className="l">leads AI-scored &amp; ranked</div></div>
               <div className="metric"><div className="n" ref={m3}>0+</div><div className="l">leads actively worked</div></div>
             </div>
+            <p className="proofline" data-reveal>
+              Lease At Ease: 15–20 booked appointments / month, 2× VA efficiency. Amazon Key for Business: a full multi-agent funnel. And the front-end? <em>You&apos;re reading one.</em>
+            </p>
           </div>
         </section>
 
         {/* CATALOG / services */}
         <section id="catalog" className="section">
           <div className="wrap">
-            <div className="eyebrow" data-reveal>What we do</div>
-            <h2 className="h2" data-reveal>One team for the whole dig.</h2>
+            <div className="eyebrow" data-reveal>What we build</div>
+            <h2 className="h2" data-reveal>Two systems. One outcome — revenue.</h2>
             <div className="cards">
               {SERVICES.map((s) => (
                 <article className="card" key={s.idx} style={{ '--card-accent': s.accent }} data-reveal>
                   <img className="cv" src={`${BASE}${s.img}`} alt="" aria-hidden="true" />
                   <div className="idx">{s.idx}</div>
-                  <div className="name">{s.name}</div>
+                  <div className="card-body">
+                    <div className="name">{s.name}</div>
+                    <p className="desc">{s.desc}</p>
+                  </div>
                 </article>
               ))}
             </div>
@@ -241,15 +259,15 @@ export default function App() {
           <div className="wrap" data-reveal>
             <div className="eyebrow">The one</div>
             <h2 className="h2">Then we find <span className="prism-text">the one.</span></h2>
-            <p className="sub">Your next best customer. Not a click. A close.</p>
+            <p className="sub">Your next best customer — surfaced by the system, closed by the front-end. Not a click. A close.</p>
           </div>
         </section>
 
         {/* CTA */}
         <section id="cta" className="section">
           <div className="wrap" data-reveal>
-            <h2 className="h2 prism-text">Find your next customer.</h2>
-            <p className="sub">Thirty minutes, no pitch — an honest look at where your pipeline is leaking.</p>
+            <h2 className="h2 prism-text">Let&apos;s build your system.</h2>
+            <p className="sub">Thirty minutes, no pitch. We&apos;ll map where your pipeline leaks and exactly what we&apos;d build to fix it.</p>
             <div className="cta-row">
               <a className="btn btn-prism" href={CALENDLY} target="_blank" rel="noreferrer">Book a call</a>
             </div>
