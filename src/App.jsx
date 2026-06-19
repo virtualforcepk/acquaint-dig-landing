@@ -34,6 +34,8 @@ export default function App() {
   const m1 = useRef(null)
   const m2 = useRef(null)
   const m3 = useRef(null)
+  const still1 = useRef(null) // mobile crossfade dig-narrative layers (images, not video)
+  const still2 = useRef(null)
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
@@ -42,8 +44,9 @@ export default function App() {
 
     const prefersReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const smallScreen = window.matchMedia('(max-width: 760px)').matches
-    // Video scrub now runs on mobile too (light 3.6MB encode); only the heavy real-time 3D diamond stays desktop-only.
-    const videoOff = prefersReduce
+    // Video scrub is DESKTOP-ONLY: real mobile (iOS Safari) paints a paused/scrubbed <video> black.
+    // Mobile gets a reliable still-image dig narrative instead (crossfade block below). 3D diamond is also desktop-only.
+    const videoOff = prefersReduce || smallScreen
     const heavy3DOff = prefersReduce || smallScreen
 
     // ---------- Lenis smooth scroll, wired to ScrollTrigger + gsap.ticker ----------
@@ -118,6 +121,25 @@ export default function App() {
       else video.addEventListener('loadedmetadata', startScrub, { once: true })
     }
 
+    // ---------- mobile: photoreal still-image dig narrative (iOS can't render a paused/scrubbed <video>) ----------
+    if (smallScreen && !prefersReduce) {
+      const STILLS = ['00-hero-surface', '01-dirt', '02-dig', '03-emerald', '04-sapphire', '05-diamond', '06-cta-resolve']
+        .map((n) => `${BASE}img/m/${n}.jpg`)
+      STILLS.forEach((s) => { const im = new Image(); im.src = s }) // preload so crossfades don't flash
+      const setImg = (el, src) => { if (el && el.dataset.src !== src) { el.style.backgroundImage = `url(${src})`; el.dataset.src = src } }
+      const onStill = () => {
+        const max = document.body.scrollHeight - window.innerHeight
+        const p = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0
+        const f = p * (STILLS.length - 1)
+        const i = Math.floor(f)
+        setImg(still1.current, STILLS[i])
+        setImg(still2.current, STILLS[Math.min(STILLS.length - 1, i + 1)])
+        if (still2.current) still2.current.style.opacity = String(f - i)
+      }
+      lenis.on('scroll', onStill)
+      onStill()
+    }
+
     // ---------- real-time 3D diamond (climax hero) — desktop only (heavy WebGL) ----------
     let gl = null
     let onPointer = null
@@ -175,7 +197,10 @@ export default function App() {
         <video ref={bgRef} className="bg-video" muted playsInline preload="auto" poster={`${BASE}img/00-hero-surface.png`}>
           <source src={`${BASE}bg.mp4?v=enc3`} type="video/mp4" />
         </video>
-        <div className="bg-static" aria-hidden="true" style={{ backgroundImage: `url(${BASE}img/05-diamond.png)` }} />
+        <div className="bg-static" aria-hidden="true">
+          <div className="bg-still" ref={still1} />
+          <div className="bg-still bg-still-top" ref={still2} />
+        </div>
       </div>
       <div className="bg-tint" aria-hidden="true" />
       <canvas ref={glRef} className="gl-canvas" aria-hidden="true" />
