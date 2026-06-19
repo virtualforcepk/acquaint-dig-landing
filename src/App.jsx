@@ -42,7 +42,9 @@ export default function App() {
 
     const prefersReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const smallScreen = window.matchMedia('(max-width: 760px)').matches
-    const lightMode = prefersReduce || smallScreen // skip frame scrubbing -> static bg
+    // Video scrub now runs on mobile too (light 3.6MB encode); only the heavy real-time 3D diamond stays desktop-only.
+    const videoOff = prefersReduce
+    const heavy3DOff = prefersReduce || smallScreen
 
     // ---------- Lenis smooth scroll, wired to ScrollTrigger + gsap.ticker ----------
     const lenis = new Lenis({ duration: 1.1, smoothWheel: true, wheelMultiplier: 1, touchMultiplier: 1.5 })
@@ -68,8 +70,8 @@ export default function App() {
         })
       })
 
-      // pin the gems + proof section as the held "reveal" moment
-      ScrollTrigger.create({ trigger: '#ingredients', start: 'top top', end: '+=110%', pin: true, pinSpacing: true })
+      // pin the gems + proof section as the held "reveal" moment (desktop only — pins are janky on mobile)
+      if (!smallScreen) ScrollTrigger.create({ trigger: '#ingredients', start: 'top top', end: '+=110%', pin: true, pinSpacing: true })
 
       // metric count-up on enter
       const fmt = (v) => Math.round(v).toLocaleString('en-US') + '+'
@@ -87,8 +89,8 @@ export default function App() {
       })
     })
 
-    // ---------- scroll-scrubbed background video ----------
-    if (!lightMode && video) {
+    // ---------- scroll-scrubbed background video (desktop + mobile) ----------
+    if (!videoOff && video) {
       const startScrub = () => {
         if (disposed) return
         const dur = isFinite(video.duration) && video.duration > 0 ? video.duration : 12
@@ -116,11 +118,11 @@ export default function App() {
       else video.addEventListener('loadedmetadata', startScrub, { once: true })
     }
 
-    // ---------- real-time 3D diamond (climax hero) ----------
+    // ---------- real-time 3D diamond (climax hero) — desktop only (heavy WebGL) ----------
     let gl = null
     let onPointer = null
     let onResize = null
-    if (!lightMode && glRef.current) {
+    if (!heavy3DOff && glRef.current) {
       gl = createDiamond3D(glRef.current)
       window.__gl = gl
       // reveal the 3D diamond + dim the video as the "the one" section enters

@@ -154,8 +154,7 @@ img { display: block; max-width: 100%; }
 
 /* ===================  fallbacks  =================== */
 @media (max-width: 760px) {
-  .bg-video { display: none; }
-  .bg-static { display: block; }
+  /* video scrub now runs on mobile (light 3.6MB encode) — keep .bg-video visible */
   .nav .links a:not(.book) { display: none; }
   .cards { grid-template-columns: 1fr; }
   .cue { display: none; }
