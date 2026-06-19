@@ -86,7 +86,7 @@ export default function App() {
         gsap.to(proxy, {
           t: dur,
           ease: 'none',
-          scrollTrigger: { trigger: document.body, start: 'top top', end: 'bottom bottom', scrub: 0.4 },
+          scrollTrigger: { trigger: document.body, start: 'top top', end: 'bottom bottom', scrub: 1.1 },
           onUpdate: () => {
             if (video.readyState >= 2) {
               const t = Math.min(dur - 0.04, Math.max(0, proxy.t))
@@ -110,7 +110,7 @@ export default function App() {
     let gl = null
     let onPointer = null
     let onResize = null
-    if (glRef.current) {
+    if (!lightMode && glRef.current) {
       gl = createDiamond3D(glRef.current)
       window.__gl = gl
       // reveal the 3D diamond + dim the video as the "the one" section enters
