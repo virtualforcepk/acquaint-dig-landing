@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Lenis from 'lenis'
+import { createDiamond3D } from './diamond3d'
 
 const CALENDLY = 'https://calendly.com/kamran1-sou9/30min'
 
@@ -18,6 +19,7 @@ const BASE = import.meta.env.BASE_URL
 
 export default function App() {
   const bgRef = useRef(null)
+  const glRef = useRef(null)
   const m1 = useRef(null)
   const m2 = useRef(null)
   const m3 = useRef(null)
@@ -103,6 +105,31 @@ export default function App() {
       else video.addEventListener('loadedmetadata', startScrub, { once: true })
     }
 
+    // ---------- real-time 3D diamond (climax hero) ----------
+    let gl = null
+    let onPointer = null
+    let onResize = null
+    if (glRef.current) {
+      gl = createDiamond3D(glRef.current)
+      window.__gl = gl
+      // reveal the 3D diamond + dim the video as the "the one" section enters
+      ScrollTrigger.create({
+        trigger: '#experience',
+        start: 'top 80%',
+        end: 'top 30%',
+        onUpdate: (self) => {
+          gl.setReveal(self.progress)
+          if (video) video.style.opacity = String(1 - 0.6 * self.progress)
+        },
+      })
+      onPointer = (e) => {
+        gl.setPointer((e.clientX / window.innerWidth) * 2 - 1, -((e.clientY / window.innerHeight) * 2 - 1))
+      }
+      onResize = () => gl.resize()
+      window.addEventListener('pointermove', onPointer, { passive: true })
+      window.addEventListener('resize', onResize)
+    }
+
     ScrollTrigger.refresh()
     // re-measure once web fonts + images settle (pins depend on accurate heights)
     const refreshT = setTimeout(() => ScrollTrigger.refresh(), 700)
@@ -117,9 +144,13 @@ export default function App() {
       ctx.revert()
       ScrollTrigger.getAll().forEach((st) => st.kill())
       lenis.destroy()
+      if (onPointer) window.removeEventListener('pointermove', onPointer)
+      if (onResize) window.removeEventListener('resize', onResize)
+      if (gl) gl.destroy()
       delete window.__lenis
       delete window.__ST
       delete window.__bgv
+      delete window.__gl
     }
   }, [])
 
@@ -133,6 +164,7 @@ export default function App() {
         <div className="bg-static" aria-hidden="true" style={{ backgroundImage: `url(${BASE}img/05-diamond.png)` }} />
       </div>
       <div className="bg-tint" aria-hidden="true" />
+      <canvas ref={glRef} className="gl-canvas" aria-hidden="true" />
 
       {/* nav */}
       <nav className="nav">
