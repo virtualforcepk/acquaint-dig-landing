@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Lenis from 'lenis'
 import { createDiamond3D } from './diamond3d'
 
-const CALENDLY = 'https://calendly.com/kamran1-sou9/30min'
+const CALENDLY = 'https://calendly.com/kamran1-sou9/new-meeting'
 
 // Two offers, with gem stills as subtle card visuals.
 const SERVICES = [
@@ -284,7 +284,7 @@ export default function App() {
               <div className="tag">Get people acquainted with your media.</div>
             </div>
             <div className="socials">
-              <a href="#" aria-label="LinkedIn">LinkedIn</a>
+              <a href="https://www.linkedin.com/in/kb1017/" target="_blank" rel="noreferrer" aria-label="LinkedIn">LinkedIn</a>
               <a href="#" aria-label="X">X</a>
               <a href="#" aria-label="Instagram">Instagram</a>
               <a href="#" aria-label="Facebook">Facebook</a>
