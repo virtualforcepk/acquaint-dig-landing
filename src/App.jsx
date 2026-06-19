@@ -13,7 +13,7 @@ const SERVICES = [
     name: 'Lead-Gen Systems That Convert',
     accent: 'var(--emerald)',
     img: 'img/03-emerald.png',
-    desc: 'We find your next customer and turn them into a sale. Targeting, multi-channel outreach, AI lead-scoring and CRM automation — engineered as one system, running on autopilot.',
+    desc: 'We dig your next customer out of the noise and turn them into a sale. Targeting, multi-channel outreach, AI lead-scoring and CRM automation — engineered as one system, running on autopilot.',
   },
   {
     idx: '02',
@@ -194,7 +194,7 @@ export default function App() {
         <section id="home" className="section">
           <div className="wrap" data-reveal>
             <div className="eyebrow">AI systems + front-end</div>
-            <h1 className="h1">We build the systems that find your customers — and the front-ends that close them.</h1>
+            <h1 className="h1">We live in the trenches that find your customers — and build the systems that convert them.</h1>
             <p className="sub">Acquaint Media ships production lead-gen systems and the full-stack experiences that convert them. Not campaigns. Systems that run while you sleep.</p>
             <div className="cta-row">
               <a className="btn" href={CALENDLY} target="_blank" rel="noreferrer">Book a call</a>
@@ -207,10 +207,10 @@ export default function App() {
         {/* SPLIT / the dig */}
         <section id="split" className="section">
           <div className="wrap">
-            <div className="eyebrow" data-reveal>The problem</div>
-            <h2 className="h2" data-reveal>Your market is mostly noise.</h2>
+            <div className="eyebrow" data-reveal>The grind</div>
+            <h2 className="h2" data-reveal>Your market is mostly dirt.</h2>
             <p className="sub" data-reveal>
-              Most agencies sell you clicks and a landing page. We build the system underneath — targeting, outreach, AI scoring, and the interface that converts — then we run it for you.
+              Most agencies sell you clicks and a landing page, then leave you to dig. We build the system underneath — targeting, outreach, AI scoring, and the front-end that converts — then we work it for you.
             </p>
           </div>
         </section>
@@ -221,7 +221,7 @@ export default function App() {
             <div className="eyebrow" data-reveal>Proof, not pitch</div>
             <h2 className="h2" data-reveal>We build the systems operators run on.</h2>
             <p className="sub" data-reveal>
-              Years of building production AI systems and the front-ends around them — alongside operators across the industry. Automation that <strong>sources, scores, and works leads</strong>, every day. Not demos.
+              Years in the trenches building production AI systems and the front-ends around them — alongside operators across the industry. Automation that <strong>sources, scores, and works leads</strong>, every day. Not demos.
             </p>
             <div className="metrics" data-reveal>
               <div className="metric"><div className="n" ref={m1}>0+</div><div className="l">prospects sourced</div></div>
@@ -266,8 +266,8 @@ export default function App() {
         {/* CTA */}
         <section id="cta" className="section">
           <div className="wrap" data-reveal>
-            <h2 className="h2 prism-text">Let&apos;s build your system.</h2>
-            <p className="sub">Thirty minutes, no pitch. We&apos;ll map where your pipeline leaks and exactly what we&apos;d build to fix it.</p>
+            <h2 className="h2 prism-text">Let&apos;s start digging.</h2>
+            <p className="sub">Thirty minutes, no pitch. We&apos;ll show you where your pipeline&apos;s buried and exactly what we&apos;d build to dig it out.</p>
             <div className="cta-row">
               <a className="btn btn-prism" href={CALENDLY} target="_blank" rel="noreferrer">Book a call</a>
             </div>
