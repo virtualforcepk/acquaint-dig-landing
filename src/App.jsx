@@ -19,6 +19,7 @@ const BASE = import.meta.env.BASE_URL
 
 export default function App() {
   const bgRef = useRef(null)
+  const bgLayerRef = useRef(null)
   const glRef = useRef(null)
   const m1 = useRef(null)
   const m2 = useRef(null)
@@ -119,7 +120,8 @@ export default function App() {
         end: 'top 30%',
         onUpdate: (self) => {
           gl.setReveal(self.progress)
-          if (video) video.style.opacity = String(1 - 0.6 * self.progress)
+          // fully fade the descent background to dark so the ONLY diamond is the 3D one
+          if (bgLayerRef.current) bgLayerRef.current.style.opacity = String(Math.max(0, 1 - self.progress * 1.08))
         },
       })
       onPointer = (e) => {
@@ -157,7 +159,7 @@ export default function App() {
   return (
     <>
       {/* fixed background motion layer */}
-      <div className="bg-layer">
+      <div className="bg-layer" ref={bgLayerRef}>
         <video ref={bgRef} className="bg-video" muted playsInline preload="auto" poster={`${BASE}img/00-hero-surface.png`}>
           <source src={`${BASE}bg.mp4`} type="video/mp4" />
         </video>
