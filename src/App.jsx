@@ -285,9 +285,6 @@ export default function App() {
             </div>
             <div className="socials">
               <a href="https://www.linkedin.com/in/kb1017/" target="_blank" rel="noreferrer" aria-label="LinkedIn">LinkedIn</a>
-              <a href="#" aria-label="X">X</a>
-              <a href="#" aria-label="Instagram">Instagram</a>
-              <a href="#" aria-label="Facebook">Facebook</a>
             </div>
           </div>
           <div className="meta">
